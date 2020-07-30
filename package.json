@@ -4,6 +4,9 @@
   "description": "CLI tool to create Lichess chess tournaments",
   "repository": "github:xRuiAlves/lichess-tournament-creator",
   "main": "src/main.js",
+  "bin": {
+    "lichess-tournament-creator": "./bin/index.js"
+  },
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint test/**/*.js src/**/*.js"
