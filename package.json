@@ -20,5 +20,8 @@
   "devDependencies": {
     "eslint": "^7.5.0",
     "jest": "^26.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }

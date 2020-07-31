@@ -1,14 +1,11 @@
 /* eslint-disable no-undef */
-const { createArenaTournament, createSwissTournament } = require("../src/tournamentCreator");
+const { validateArenaTournamentParams, validateSwissTournamentParams } = require("../src/tournamentValidator");
 const ERRORS = require("../src/errors");
-
-// eslint-disable-next-line require-await
-const api_callback = () => {};
 
 describe("Arena tournament creating - parameters validation", () => {
     it("should detect invalid tournament name", () => {
         try {
-            createArenaTournament("");
+            validateArenaTournamentParams("");
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -18,7 +15,7 @@ describe("Arena tournament creating - parameters validation", () => {
 
     it("should detect invalid tournament date", () => {
         try {
-            createArenaTournament("Arena Tournament", "20 Set, 2050");
+            validateArenaTournamentParams("Arena Tournament", "20 Set, 2050");
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -28,7 +25,7 @@ describe("Arena tournament creating - parameters validation", () => {
 
     it("should detect invalid tournament duration", () => {
         try {
-            createArenaTournament("Arena Tournament", "2045-12-25 06:30:00", -10);
+            validateArenaTournamentParams("Arena Tournament", "2045-12-25 06:30:00", -10);
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -38,7 +35,7 @@ describe("Arena tournament creating - parameters validation", () => {
 
     it("should detect invalid match duration", () => {
         try {
-            createArenaTournament("Arena Tournament", "2045-12-25 06:30:00", 90, "not number");
+            validateArenaTournamentParams("Arena Tournament", "2045-12-25 06:30:00", 90, "not number");
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -48,7 +45,7 @@ describe("Arena tournament creating - parameters validation", () => {
 
     it("should detect invalid match increment per move", () => {
         try {
-            createArenaTournament("Arena Tournament", "2045-12-25 06:30:00", 90, 5, [3]);
+            validateArenaTournamentParams("Arena Tournament", "2045-12-25 06:30:00", 90, 5, null);
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -58,7 +55,7 @@ describe("Arena tournament creating - parameters validation", () => {
 
     it("should create tournament with valid inputs given", () => {
         expect(
-            () => createArenaTournament("Arena Tournament", "2045-12-25 06:30:00", 90, 5, 3, api_callback),
+            () => validateArenaTournamentParams("Arena Tournament", "2045-12-25 06:30:00", 90, 5, 3),
         ).not.toThrow();
     });
 });
@@ -66,7 +63,7 @@ describe("Arena tournament creating - parameters validation", () => {
 describe("Swiss tournament creating - parameters validation", () => {
     it("should detect invalid tournament name", () => {
         try {
-            createSwissTournament("");
+            validateSwissTournamentParams("");
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -76,7 +73,7 @@ describe("Swiss tournament creating - parameters validation", () => {
 
     it("should detect invalid tournament team ID", () => {
         try {
-            createSwissTournament("Swiss Tournament", "");
+            validateSwissTournamentParams("Swiss Tournament", "");
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -86,7 +83,7 @@ describe("Swiss tournament creating - parameters validation", () => {
 
     it("should detect invalid tournament date", () => {
         try {
-            createSwissTournament("Swiss Tournament", "1234567890abcdef", "20 Set, 2050");
+            validateSwissTournamentParams("Swiss Tournament", "1234567890abcdef", "20 Set, 2050");
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -96,7 +93,7 @@ describe("Swiss tournament creating - parameters validation", () => {
 
     it("should detect invalid tournament number of rounds", () => {
         try {
-            createSwissTournament("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", -10);
+            validateSwissTournamentParams("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", -10);
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -106,7 +103,7 @@ describe("Swiss tournament creating - parameters validation", () => {
 
     it("should detect invalid tournament match duration", () => {
         try {
-            createSwissTournament("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, null);
+            validateSwissTournamentParams("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, null);
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -116,7 +113,7 @@ describe("Swiss tournament creating - parameters validation", () => {
 
     it("should detect invalid tournament match increment per move", () => {
         try {
-            createSwissTournament("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, 5, "not a number");
+            validateSwissTournamentParams("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, 5, "not a number");
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(ERRORS.INVALID_ARGS.code);
@@ -126,7 +123,7 @@ describe("Swiss tournament creating - parameters validation", () => {
 
     it("should create tournament with valid inputs given", () => {
         expect(
-            () => createSwissTournament("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, 5, 3, api_callback),
+            () => validateSwissTournamentParams("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, 5, 3),
         ).not.toThrow();
     });
 });

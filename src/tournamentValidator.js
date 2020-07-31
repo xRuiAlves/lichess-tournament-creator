@@ -3,15 +3,15 @@ const { isNumberValid, isDateFormatValid } = require("./utils");
 
 /**
  * Creates an arena tournament
- * @param {String} name
- * @param {String} date
- * @param {Integer} t_duration
- * @param {Integer} m_duration
- * @param {Integer} m_increment
- * @param {Function} api_callback Async function to create tournament
+ * @param {String} name Tournament name
+ * @param {String} date Tournament date, in 'YYYY-MM-DD hh:mm:ss' format
+ * @param {Integer} t_duration Tournament duration, in minutes
+ * @param {Integer} m_duration Match duration, in minutes
+ * @param {Integer} m_increment Match increment per move, in seconds
  * @throws {Object}
+ * @returns {Boolean} True if valid
  */
-const createArenaTournament = (name, date, t_duration, m_duration, m_increment, api_callback) => {
+const validateArenaTournamentParams = (name, date, t_duration, m_duration, m_increment) => {
     if (name.length === 0) {
         throw {
             err: ERRORS.INVALID_ARGS,
@@ -24,40 +24,46 @@ const createArenaTournament = (name, date, t_duration, m_duration, m_increment, 
             msg: "Tournament date should be specified in a 'YYYY-MM-DD hh:mm:ss' format.",
         };
     }
-    if (!isNumberValid(t_duration)) {
+    if (!isNumberValid(parseInt(t_duration, 10))) {
         throw {
             err: ERRORS.INVALID_ARGS,
             msg: "Tournament duration should be a non-negative integer number.",
         };
     }
-    if (!isNumberValid(m_duration)) {
+    if (!isNumberValid(parseInt(m_duration, 10))) {
         throw {
             err: ERRORS.INVALID_ARGS,
             msg: "Match duration should be a non-negative integer number.",
         };
     }
-    if (!isNumberValid(m_increment)) {
+    if (!isNumberValid(parseInt(m_increment, 10))) {
         throw {
             err: ERRORS.INVALID_ARGS,
             msg: "Match increment per move should be a non-negative integer number.",
         };
     }
 
-    return api_callback(name, date, t_duration, m_duration, m_increment);
+    return true;
 };
 
 /**
  * Creates a swiss tournament
- * @param {String} name
- * @param {String} team_id
- * @param {String} date
- * @param {Integer} num_rounds
- * @param {Integer} m_duration
- * @param {Integer} m_increment
- * @param {Function} api_callback Async function to create tournament
+ * @param {String} name Tournament name
+ * @param {String} team_id Team identification string
+ * @param {String} date Tournament date, in 'YYYY-MM-DD hh:mm:ss' format
+ * @param {Integer} num_rounds Tournament number of rounds
+ * @param {Integer} m_duration Match duration, in minutes
+ * @param {Integer} m_increment Match increment per move, in seconds
  * @throws {Object}
+ * @returns {Boolean} True if valid
  */
-const createSwissTournament = (name, team_id, date, num_rounds, m_duration, m_increment, api_callback) => {
+const validateSwissTournamentParams = (name, team_id, date, num_rounds, m_duration, m_increment) => {
+    console.info(`name = ${name}`);
+    console.info(`team_id = ${team_id}`);
+    console.info(`date = ${date}`);
+    console.info(`num_rounds = ${num_rounds}`);
+    console.info(`m_duration = ${m_duration}`);
+    console.info(`m_increment = ${m_increment}`);
     if (name.length === 0) {
         throw {
             err: ERRORS.INVALID_ARGS,
@@ -76,29 +82,29 @@ const createSwissTournament = (name, team_id, date, num_rounds, m_duration, m_in
             msg: "Tournament date should be specified in a 'YYYY-MM-DD hh:mm:ss' format.",
         };
     }
-    if (!isNumberValid(num_rounds)) {
+    if (!isNumberValid(parseInt(num_rounds, 10))) {
         throw {
             err: ERRORS.INVALID_ARGS,
             msg: "Tournament number of rounds should be a non-negative integer number.",
         };
     }
-    if (!isNumberValid(m_duration)) {
+    if (!isNumberValid(parseInt(m_duration, 10))) {
         throw {
             err: ERRORS.INVALID_ARGS,
             msg: "Match duration should be a non-negative integer number.",
         };
     }
-    if (!isNumberValid(m_increment)) {
+    if (!isNumberValid(parseInt(m_increment, 10))) {
         throw {
             err: ERRORS.INVALID_ARGS,
             msg: "Match increment per move should be a non-negative integer number.",
         };
     }
 
-    return api_callback(name, team_id, date, num_rounds, m_duration, m_increment, api_callback);
+    return true;
 };
 
 module.exports = {
-    createArenaTournament,
-    createSwissTournament,
+    validateArenaTournamentParams,
+    validateSwissTournamentParams,
 };
