@@ -2,13 +2,13 @@
  * Error types
  */
 const ERRORS = Object.freeze({
-    ARGS: {
+    INSUFFICIENT_ARGS: {
         code: 1,
         description: "Insufficient arguments.",
     },
-    INVALID_TOURNAMENT_TYPE: {
+    INVALID_ARGS: {
         code: 2,
-        description: "Invalid tournament type (must be 'swiss' or 'arena')",
+        description: "Invalid arguments.",
     },
 });
 
