@@ -13,10 +13,10 @@ class LichessAPI {
         this.auth_token = auth_token;
     }
 
-    validateArenaTournamentParams(name, date, t_duration, m_duration, m_increment) {
+    createArenaTournament(name, date, t_duration, m_duration, m_increment) {
         return axios({
             method: "post",
-            url: LichessAPI.URLS.CREATE_TOURNAMENT_URL,
+            url: LichessAPI.URLS.CREATE_ARENA_TOURNAMENT_URL,
             headers: {
                 "Authorization": `Bearer ${this.auth_token}`,
             },
@@ -29,12 +29,33 @@ class LichessAPI {
             },
         });
     }
+
+    createSwissTournament(name, team_id, date, num_rounds, m_duration, m_increment) {
+        return axios({
+            method: "post",
+            url: `${LichessAPI.URLS.CREATE_SWISS_TOURNAMENT_URL}/${team_id}`,
+            headers: {
+                "Authorization": `Bearer ${this.auth_token}`,
+            },
+            data: {
+                "name": name,
+                "startsAt": convertDateFormat(date),
+                "nbRounds": parseInt(num_rounds, 10),
+                "clock": {
+                    "limit": parseInt(m_duration, 10) * 60,
+                    "increment": parseInt(m_increment, 10),
+                },
+            },
+        });
+    }
 }
 
 LichessAPI.URLS = Object.freeze({
     BASE_URL: "https://lichess.org",
-    CREATE_TOURNAMENT_URL: "https://lichess.org/api/tournament",
-    TOURNAMENT_PAGE_URL: "https://lichess.org/tournament",
+    CREATE_ARENA_TOURNAMENT_URL: "https://lichess.org/api/tournament",
+    CREATE_SWISS_TOURNAMENT_URL: "https://lichess.org/api/swiss/new",
+    ARENA_TOURNAMENT_PAGE_URL: "https://lichess.org/tournament",
+    SWISS_TOURNAMENT_PAGE_URL: "https://lichess.org/swiss",
 });
 
 module.exports = LichessAPI;

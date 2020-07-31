@@ -22,11 +22,14 @@ const main = () => {
 
     if (tournament_type === TOURNAMENT_TYPES.ARENA) {
         validateArenaTournamentParams(...process.argv.slice(3));
-        lichessAPI.validateArenaTournamentParams(...process.argv.slice(3))
-            .then((res) => console.info(`Created: ${LichessAPI.URLS.TOURNAMENT_PAGE_URL}/${res.data.id}`))
+        lichessAPI.createArenaTournament(...process.argv.slice(3))
+            .then((res) => console.info(`Created: ${LichessAPI.URLS.ARENA_TOURNAMENT_PAGE_URL}/${res.data.id}`))
             .catch(handleBadResponse);
     } else if (tournament_type === TOURNAMENT_TYPES.SWISS) {
         validateSwissTournamentParams(...process.argv.slice(3));
+        lichessAPI.createSwissTournament(...process.argv.slice(3))
+            .then((res) => console.info(`Created: ${LichessAPI.URLS.SWISS_TOURNAMENT_PAGE_URL}/${res.data.id}`))
+            .catch(handleBadResponse);
     } else {
         throw {
             err: ERRORS.INVALID_ARGS,
@@ -43,7 +46,10 @@ const handleBadResponse = ({ response }) => {
         printError(ERRORS.LICHESS_BAD_REQUEST, `Lichess error message was:\n${JSON.stringify(response.data, null, 2)}`);
         process.exit(ERRORS.LICHESS_BAD_REQUEST.code);
     } else {
-        printError(ERRORS.LICHESS_UNKNOWN_ERROR);
+        printError(
+            ERRORS.LICHESS_UNKNOWN_ERROR,
+            `Response status code was: ${response.status}\nError message was:\n${JSON.stringify(response.data, null, 2)}`,
+        );
         process.exit(ERRORS.LICHESS_UNKNOWN_ERROR.code);
     }
 };

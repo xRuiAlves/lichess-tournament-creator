@@ -58,12 +58,6 @@ const validateArenaTournamentParams = (name, date, t_duration, m_duration, m_inc
  * @returns {Boolean} True if valid
  */
 const validateSwissTournamentParams = (name, team_id, date, num_rounds, m_duration, m_increment) => {
-    console.info(`name = ${name}`);
-    console.info(`team_id = ${team_id}`);
-    console.info(`date = ${date}`);
-    console.info(`num_rounds = ${num_rounds}`);
-    console.info(`m_duration = ${m_duration}`);
-    console.info(`m_increment = ${m_increment}`);
     if (name.length === 0) {
         throw {
             err: ERRORS.INVALID_ARGS,
