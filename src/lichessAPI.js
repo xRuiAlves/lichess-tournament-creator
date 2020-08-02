@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { convertDateFormat } = require("./utils");
+const { validateArenaTournamentParams, validateSwissTournamentParams } = require("./tournamentValidator");
 
 /**
  * Lichess API connector
@@ -23,6 +24,7 @@ class LichessAPI {
      * @returns {Promise} Axios request promise
      */
     createArenaTournament(name, date, t_duration, m_duration, m_increment) {
+        validateArenaTournamentParams(name, date, t_duration, m_duration, m_increment);
         return axios({
             method: "post",
             url: LichessAPI.URLS.CREATE_ARENA_TOURNAMENT_URL,
@@ -50,6 +52,7 @@ class LichessAPI {
      * @returns {Promise} Axios request promise
      */
     createSwissTournament(name, team_id, date, num_rounds, m_duration, m_increment) {
+        validateSwissTournamentParams(name, team_id, date, num_rounds, m_duration, m_increment);
         return axios({
             method: "post",
             url: `${LichessAPI.URLS.CREATE_SWISS_TOURNAMENT_URL}/${team_id}`,
