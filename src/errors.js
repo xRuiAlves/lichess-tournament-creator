@@ -26,6 +26,14 @@ const ERRORS = Object.freeze({
         code: 6,
         description: "You have rechead the daily limit of tournament a user may create.",
     },
+    INVALID_INPUT_FILE: {
+        code: 7,
+        description: "Invalid input file.",
+    },
+    INVALID_FILE_CONTENT: {
+        code: 8,
+        description: "Failed file parsing.",
+    },
 });
 
 module.exports = ERRORS;
