@@ -23,18 +23,31 @@ const main = () => {
     if (tournament_type === TOURNAMENT_TYPES.ARENA) {
         validateArenaTournamentParams(...process.argv.slice(3));
         lichessAPI.createArenaTournament(...process.argv.slice(3))
-            .then((res) => console.info(`Created: ${LichessAPI.URLS.ARENA_TOURNAMENT_PAGE_URL}/${res.data.id}`))
+            .then((res) => handleSucessResponse(res, "arena"))
             .catch(handleBadResponse);
     } else if (tournament_type === TOURNAMENT_TYPES.SWISS) {
         validateSwissTournamentParams(...process.argv.slice(3));
         lichessAPI.createSwissTournament(...process.argv.slice(3))
-            .then((res) => console.info(`Created: ${LichessAPI.URLS.SWISS_TOURNAMENT_PAGE_URL}/${res.data.id}`))
+            .then((res) => handleSucessResponse(res, "swiss"))
             .catch(handleBadResponse);
     } else {
         throw {
             err: ERRORS.INVALID_ARGS,
             msg: "Invalid tournament type (must be 'swiss' or 'arena')",
         };
+    }
+};
+
+const handleSucessResponse = ({ status, data }, type) => {
+    if (status === 200 && data.id) {
+        const url = type === "arena" ? LichessAPI.URLS.ARENA_TOURNAMENT_PAGE_URL : LichessAPI.URLS.SWISS_TOURNAMENT_PAGE_URL;
+        console.info(`Created: ${url}/${data.id}`);
+    } else if (status === 200 && !data.id) {
+        printError(ERRORS.LICHESS_TOURNAMENT_LIMIT_EXCEEDED);
+        process.exit(ERRORS.LICHESS_TOURNAMENT_LIMIT_EXCEEDED.code);
+    } else {
+        printError(ERRORS.LICHESS_UNKNOWN_ERROR);
+        process.exit(ERRORS.LICHESS_UNKNOWN_ERROR.code);
     }
 };
 

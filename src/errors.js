@@ -22,6 +22,10 @@ const ERRORS = Object.freeze({
         code: 5,
         description: "Lichess unknown error occured.",
     },
+    LICHESS_TOURNAMENT_LIMIT_EXCEEDED: {
+        code: 6,
+        description: "You have rechead the daily limit of tournament a user may create.",
+    },
 });
 
 module.exports = ERRORS;

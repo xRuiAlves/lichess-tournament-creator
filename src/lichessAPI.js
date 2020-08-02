@@ -13,6 +13,15 @@ class LichessAPI {
         this.auth_token = auth_token;
     }
 
+    /**
+     * Create an Arena tournament
+     * @param {String} name
+     * @param {String} date
+     * @param {Integer} t_duration
+     * @param {Integer} m_duration
+     * @param {Integer} m_increment
+     * @returns {Promise} Axios request promise
+     */
     createArenaTournament(name, date, t_duration, m_duration, m_increment) {
         return axios({
             method: "post",
@@ -30,6 +39,16 @@ class LichessAPI {
         });
     }
 
+    /**
+     * Create a Swiss tournament
+     * @param {String} name
+     * @param {String} team_id
+     * @param {String} date
+     * @param {Integer} num_rounds
+     * @param {Integer} m_duration
+     * @param {Integer} m_increment
+     * @returns {Promise} Axios request promise
+     */
     createSwissTournament(name, team_id, date, num_rounds, m_duration, m_increment) {
         return axios({
             method: "post",
@@ -50,6 +69,9 @@ class LichessAPI {
     }
 }
 
+/**
+ * API Urls used to access Lichess
+ */
 LichessAPI.URLS = Object.freeze({
     BASE_URL: "https://lichess.org",
     CREATE_ARENA_TOURNAMENT_URL: "https://lichess.org/api/tournament",
