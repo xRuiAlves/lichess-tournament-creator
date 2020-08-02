@@ -1,35 +1,46 @@
 const { printUsage, printError } = require("./printer");
 const ERRORS = require("./errors");
-const TOURNAMENT_TYPES = require("./tournamentTypes");
+const INPUT_TYPES = require("./inputTypes");
 const { validateArenaTournamentParams, validateSwissTournamentParams } = require("./tournamentValidator");
+const { readInputFile, validateFileData } = require("./fileUtils");
 const LichessAPI = require("./lichessAPI");
 
 const main = () => {
-    if (process.argv.length < 9) {
+    if (process.argv.length < 4) {
         printUsage();
         throw { err: ERRORS.INSUFFICIENT_ARGS };
     }
 
-    const tournament_type = process.argv[2].toLowerCase();
+    const input_type = process.argv[2].toLowerCase();
 
-    if (tournament_type === TOURNAMENT_TYPES.SWISS && process.argv.length < 10) {
+    if (input_type === INPUT_TYPES.SWISS && process.argv.length < 10) {
+        printUsage();
+        throw { err: ERRORS.INSUFFICIENT_ARGS };
+    }
+    if (input_type === INPUT_TYPES.ARENA && process.argv.length < 9) {
         printUsage();
         throw { err: ERRORS.INSUFFICIENT_ARGS };
     }
 
-    const auth_token = process.argv[tournament_type === TOURNAMENT_TYPES.ARENA ? 8 : 9];
-    const lichessAPI = new LichessAPI(auth_token);
-
-    if (tournament_type === TOURNAMENT_TYPES.ARENA) {
+    if (input_type === INPUT_TYPES.ARENA) {
+        const auth_token = process.argv[8];
+        const lichessAPI = new LichessAPI(auth_token);
         validateArenaTournamentParams(...process.argv.slice(3));
         lichessAPI.createArenaTournament(...process.argv.slice(3))
             .then((res) => handleSucessResponse(res, "arena"))
             .catch(handleBadResponse);
-    } else if (tournament_type === TOURNAMENT_TYPES.SWISS) {
+    } else if (input_type === INPUT_TYPES.SWISS) {
+        const auth_token = process.argv[9];
+        const lichessAPI = new LichessAPI(auth_token);
         validateSwissTournamentParams(...process.argv.slice(3));
         lichessAPI.createSwissTournament(...process.argv.slice(3))
             .then((res) => handleSucessResponse(res, "swiss"))
             .catch(handleBadResponse);
+    } else if (input_type === INPUT_TYPES.FILE) {
+        const file_name = process.argv[3];
+        const data = readInputFile(file_name);
+        validateFileData(data);
+        console.info(data);
     } else {
         throw {
             err: ERRORS.INVALID_ARGS,

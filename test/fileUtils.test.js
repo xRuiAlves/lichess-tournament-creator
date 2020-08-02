@@ -77,7 +77,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'type' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'type' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -88,7 +88,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Invalid 'type' field in tournament")).toBe(true);
+            expect(e.msg.includes("Invalid 'type' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -99,7 +99,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'name' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'name' field in tournament number 1")).toBe(true);
         }
     });
 
@@ -110,7 +110,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'date' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'date' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -121,7 +121,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Invalid 'date' field in tournament")).toBe(true);
+            expect(e.msg.includes("Invalid 'date' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -132,7 +132,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'match' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'match' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -143,7 +143,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'match.duration' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'match.duration' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -154,7 +154,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'match.increment' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'match.increment' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -165,7 +165,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'team_id' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'team_id' field in tournament number 1")).toBe(true);
         }
     });
 
@@ -176,7 +176,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'num_rounds' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'num_rounds' field in tournament number 1")).toBe(true);
         }
     });
 
@@ -187,7 +187,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Invalid 'num_rounds' field in tournament")).toBe(true);
+            expect(e.msg.includes("Invalid 'num_rounds' field in tournament number 1")).toBe(true);
         }
     });
 
@@ -198,7 +198,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Missing 'tournament_duration' field in tournament")).toBe(true);
+            expect(e.msg.includes("Missing 'tournament_duration' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -209,7 +209,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Invalid 'tournament_duration' field in tournament")).toBe(true);
+            expect(e.msg.includes("Invalid 'tournament_duration' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -220,7 +220,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Invalid 'match.duration' field in tournament")).toBe(true);
+            expect(e.msg.includes("Invalid 'match.duration' field in tournament number 2")).toBe(true);
         }
     });
 
@@ -231,7 +231,7 @@ describe("Detect invalid file format and/or structure", () => {
             fail("Should have thrown exception");
         } catch (e) {
             expect(e.err.code).toBe(8);
-            expect(e.msg.includes("Invalid 'match.increment' field in tournament")).toBe(true);
+            expect(e.msg.includes("Invalid 'match.increment' field in tournament number 1")).toBe(true);
         }
     });
 });

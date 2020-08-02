@@ -32,6 +32,9 @@ const printUsage = () => {
     console.info("\tm_duration:  match duration, in minutes");
     console.info("\tm_increment: match increment per move, in seconds");
     console.info("\tauth_token:  lichess user authorization token");
+    console.info("");
+    console.info("lichess-tournament-creator file <file_name>");
+    console.info("\tfile_name:  JSON file name");
 };
 
 module.exports = {

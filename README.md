@@ -1,4 +1,4 @@
-# Interview Matcher
+# Lichess Tournament Creator
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/lichess-tournament-creator.svg?style=flat-square)](https://www.npmjs.com/package/lichess-tournament-creator)
