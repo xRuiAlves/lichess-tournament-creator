@@ -57,6 +57,7 @@ describe("Arena tournament creating - parameters validation", () => {
         expect(
             () => validateArenaTournamentParams("Arena Tournament", "2045-12-25 06:30:00", 90, 5, 3),
         ).not.toThrow();
+        expect(validateArenaTournamentParams("Arena Tournament", "2045-12-25 06:30:00", 90, 5, 3)).toBe(true);
     });
 });
 
@@ -125,5 +126,6 @@ describe("Swiss tournament creating - parameters validation", () => {
         expect(
             () => validateSwissTournamentParams("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, 5, 3),
         ).not.toThrow();
+        expect(validateSwissTournamentParams("Swiss Tournament", "1234567890abcdef", "2045-12-25 06:30:00", 7, 5, 3)).toBe(true);
     });
 });
