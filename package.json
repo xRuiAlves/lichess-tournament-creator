@@ -11,8 +11,6 @@
     "start": "node bin/index.js",
     "test": "jest --coverage",
     "test:publish": "npm test && coveralls < coverage/lcov.info",
-    "test:mutation": "stryker run",
-    "test:mutation:publish": "stryker run --reporters dashboard",
     "lint": "eslint test/**/*.js src/**/*.js"
   },
   "keywords": [
