@@ -107,12 +107,6 @@ $ npm install
 $ npm test
 ```
 
-To run mutation tests:
-
-```
-$ npm run test:mutation
-```
-
 ## Future work
 
 - Allows public/private tournament specification, along with other tournament-tweaking options that are not available at the moment
